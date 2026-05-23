@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+build/
+
+# Netlify CLI local state
+.netlify/
+
+# Environment variables / secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Form submission exports (may contain real lead data)
+form-responses.csv
+*-responses.csv
+
+# Internal design references (large, not code)
+moodboard*.pdf
+*.psd
+*.ai
+
+# Editor / OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Local AI / agent tooling (do not commit)
+.claude/
+.agents/
+AGENTS.md
+.cursorrules
+.aider*
+.copilot/
+.continue/
+
+# Unused asset folder (contains AI-generated reference images)
+fondo/

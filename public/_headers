@@ -1,0 +1,13 @@
+# Netlify security headers — applied to every response.
+# Reference: https://docs.netlify.com/routing/headers/
+#
+# CSP is intentionally NOT set here so it doesn't silently break the
+# Google Apps Script form POST, Google Fonts, or future analytics.
+# Add CSP only after testing in report-only mode on a staging URL.
+
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+  Strict-Transport-Security: max-age=31536000; includeSubDomains

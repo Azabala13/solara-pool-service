@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /free-month.html
+
+Sitemap: https://solarapoolservice.com/sitemap.xml
