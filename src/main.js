@@ -201,7 +201,7 @@ function initMobileMenu() {
 // ==========================================
 // FORM SUBMIT  (posts to Google Sheets via Apps Script)
 // ==========================================
-const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbytihvnH0FgPBJQroWkNWDSMA2I9uzLNdHhVNGH3RN0_R1GTIgb-fFajFACLmZIq0s6/exec';
+const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzI24lbWf9C3tfNgug7PwyoVFFdjPmrKGTgt80dAVU24Hlrf0EYrtZQbEoRYjNabOI/exec';
 
 function initForm() {
   const form = document.getElementById('contact-form');
