@@ -234,23 +234,29 @@ function initForm() {
       btn.style.color = '#fff';
       return;
     }
-
+    
     // Client-side validation
-    const name = (data.name || '').trim();
-    const phone = (data.phone || '').trim();
-    const digits = phone.replace(/\D/g, '');
-    if (name.length < 2 || digits.length < 7) {
-      showError('gs.invalid');
-      return;
-    }
+const name = (data.name || '').trim();
+const rawPhone = (data.phone || '').trim();
+const digits = rawPhone.replace(/\D/g, '');
 
-    btn.disabled = true;
-    btn.textContent = '...';
+// Solo acepta números de 10 dígitos (US)
+if (name.length < 2 || digits.length !== 10) {
+  showError('gs.invalid');
+  return;
+}
 
-    data.submittedAt = new Date().toISOString();
-    data.language = currentLang;
-    data.pageUrl = location.href;
-    delete data.website;
+// Formatea el teléfono: (832) 388-7224
+const phone = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`;
+data.phone = phone;
+
+btn.disabled = true;
+btn.textContent = '...';
+
+data.submittedAt = new Date().toISOString();
+data.language = currentLang;
+data.pageUrl = location.href;
+delete data.website;
 
     try {
       await fetch(SHEETS_ENDPOINT, {
