@@ -950,14 +950,53 @@
   </a>
 
   <script>
-    document.getElementById('claim-form').addEventListener('submit', e => {
-      e.preventDefault();
-      const btn = e.target.querySelector('button[type="submit"]');
-      btn.textContent = '✓ Got it! We\'ll be in touch shortly.';
-      btn.disabled = true;
-      btn.style.background = '#22c55e';
-      btn.style.color = '#fff';
-    });
+    const SHEETS_ENDPOINT = 'https://script.google.com/macros/s/AKfycbzI24lbWf9C3tfNgug7PwyoVFFdjPmrKGTgt80dAVU24Hlrf0EYrtZQbEoRYjNabOI/exec';
+
+document.getElementById('claim-form').addEventListener('submit', async e => {
+  e.preventDefault();
+  const form = e.target;
+  const btn = form.querySelector('button[type="submit"]');
+
+  const name  = form.querySelector('[name="name"]').value.trim();
+  const rawPhone = form.querySelector('[name="phone"]').value.trim();
+  const digits = rawPhone.replace(/\D/g, '');
+
+  if (name.length < 2 || digits.length < 7) {
+    alert('Please enter your name and a valid phone number.');
+    return;
+  }
+
+  const phone = digits.length === 10
+    ? `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6)}`
+    : rawPhone;
+
+  const checkedChip = form.querySelector('input[name="pool_state"]:checked');
+
+  const data = {
+    name,
+    phone,
+    email:      form.querySelector('[name="email"]').value.trim(),
+    zip:        form.querySelector('[name="zip"]').value.trim(),
+    pool_state: checkedChip ? checkedChip.value : '',
+    language:   'en',
+    pageUrl:    'free-month — PRIORITY LEAD',
+    submittedAt: new Date().toISOString()
+  };
+
+  btn.disabled = true;
+  btn.textContent = '...';
+
+  await fetch(SHEETS_ENDPOINT, {
+    method: 'POST',
+    mode: 'no-cors',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify(data)
+  });
+
+  btn.textContent = "✓ Got it! We'll be in touch shortly.";
+  btn.style.background = '#22c55e';
+  btn.style.color = '#fff';
+});
   </script>
 
 </body>
